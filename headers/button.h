@@ -12,6 +12,7 @@ private:
   bool clicked;
   void (*clickCallback)(void *);
   void *userCallbackData;
+  static void defaultCallback(void *);
   bool hover = false;
   virtual void setHover(sf::Vector2i mousePos);
   virtual void mouseOut();

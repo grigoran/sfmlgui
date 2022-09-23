@@ -22,7 +22,15 @@ list::list()
   selectedContent.setCharacterSize(fontSize);
   selectedContent.setFillColor(sf::Color::Black);
   selectedContent.setPosition(0, fontSpacing);
+
+  changeCallback = defaultCallback;
 }
+
+void list::setChangeCallback(void (*callback)(void *, int)) {
+  changeCallback = callback;
+}
+
+void list::setUserCallbackData(void *data) { userCallbackData = data; }
 
 void list::setContent(const char **content, int size) {
   this->content = new sf::Text[size];
@@ -54,9 +62,12 @@ void list::click(sf::Vector2i mousePos) {
     isMenuOpen = true;
   else {
     for (int i = 0; i < contentSize; i++) {
-      if (content[i].getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+      if (i != selectedItem &&
+          content[i].getGlobalBounds().contains(mousePos.x, mousePos.y)) {
         selectedItem = i;
         selectedContent.setString(content[i].getString());
+        changeCallback(userCallbackData, selectedItem);
+        isMenuOpen = false;
       }
     }
   }
@@ -96,3 +107,5 @@ void list::setPosition(float x, float y) {
                                   i * (fontSize + fontSpacing));
   }
 }
+
+void list::defaultCallback(void *, int) {}

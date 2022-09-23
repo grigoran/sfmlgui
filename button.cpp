@@ -2,8 +2,6 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
 
-void defaultCallback(void *) {}
-
 button ::button(int id) : clicked(false) {
   rect.setSize(sf::Vector2f(40.0f, 40.0f));
   rect.setFillColor(sf::Color::Red);
@@ -59,3 +57,5 @@ bool button::isClicked() {
   } else
     return false;
 }
+
+void button::defaultCallback(void *) {}

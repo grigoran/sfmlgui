@@ -19,6 +19,9 @@ private:
   int selectedItem;
   bool isChanged;
   bool hover;
+  void (*changeCallback)(void *, int);
+  static void defaultCallback(void *, int);
+  void *userCallbackData;
   virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
   virtual void click(sf::Vector2i mousePos);
   virtual void setHover(sf::Vector2i mousePos);
@@ -28,6 +31,8 @@ private:
   bool isMenuOpen;
 
 public:
+  void setUserCallbackData(void *data);
+  void setChangeCallback(void (*callback)(void *, int));
   void setContent(const char **content, int size);
   void setPosition(float x, float y);
   bool changed();

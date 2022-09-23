@@ -1,6 +1,7 @@
 #include "gui.h"
 #include <SFML/Graphics/Color.hpp>
 #include <cstdlib>
+#include <iostream>
 #include <vector>
 
 sf::Color randColor() {
@@ -20,6 +21,11 @@ void clickCallback(void *userCallbackData) {
   btnStates *state = (btnStates *)userCallbackData;
   state->hoverColor = randColor();
   state->unhoverColor = dimColor(0.5f, state->hoverColor);
+}
+
+void listCallback(void *userCallbackData, int selectedItem) {
+  int *data = (int *)userCallbackData;
+  std::cout << selectedItem << std::endl;
 }
 
 int main() {
@@ -45,15 +51,19 @@ int main() {
   for (int i = 0; i < listCount; i++) {
     myList[i].setContent(content, contentSize);
     myList[i].setPosition(i * 220 + 70, 10);
+    int *d = new int(10);
+    myList[i].setUserCallbackData(&d);
+    myList[i].setChangeCallback(listCallback);
     myGui.pushElement(&myList[i]);
   }
 
   while (myGui.isOpen()) {
     for (int i = 0; i < btnCount; i++) {
       if (btns[i].isHover()) {
-        btns[i].setFillColor(states[i].hoverColor);
-      } else
-        btns[i].setFillColor(states[i].unhoverColor);
+        // btns[i].setFillColor(states[i].hoverColor);
+      } else {
+      }
+      // btns[i].setFillColor(states[i].unhoverColor);
     }
     myGui.update();
   }
