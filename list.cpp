@@ -34,14 +34,23 @@ void list::setUserCallbackData(void *data) { userCallbackData = data; }
 
 void list::setContent(const char **content, int size) {
   this->content = new sf::Text[size];
+  int maxWidth = 0;
   for (int i = 0; i < size; i++) {
+    int width = 0;
     this->content[i].setFont(font);
     this->content[i].setString(content[i]);
     this->content[i].setCharacterSize(fontSize);
+    width = this->content[i].getLocalBounds().width;
+    if (width > maxWidth)
+      maxWidth = width;
     this->content[i].setFillColor(sf::Color::Black);
     this->content[i].setPosition(
         rect.getPosition().x, rect.getSize().y + i * (fontSize + fontSpacing));
   }
+  maxWidth += fontSpacing;
+  menuBackground.setSize(
+      sf::Vector2f(maxWidth, size * (fontSize + fontSpacing) + fontSpacing));
+  rect.setSize(sf::Vector2f(maxWidth, rect.getSize().y));
   contentSize = size;
   selectedContent.setString(this->content[0].getString());
 }

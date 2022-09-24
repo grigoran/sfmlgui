@@ -30,7 +30,7 @@ void listCallback(void *userCallbackData, int selectedItem) {
 
 int main() {
   srand(std::time(0));
-  gui myGui(800, 600, "ui");
+  Gui myGui(800, 600, "ui");
   const int btnCount = 10;
   button btns[btnCount];
   btnStates states[btnCount];

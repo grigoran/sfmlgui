@@ -4,10 +4,10 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Mouse.hpp>
 
-gui::gui(int resolutionX, int resolutionY, const char *title)
+Gui::Gui(int resolutionX, int resolutionY, const char *title)
     : window(sf::VideoMode(resolutionX, resolutionY), title) {}
 
-void gui::update() {
+void Gui::update() {
   mousePos = sf::Mouse::getPosition(window);
   sf::Event event;
 
@@ -27,7 +27,7 @@ void gui::update() {
   draw();
 }
 
-void gui::draw() {
+void Gui::draw() {
   int grayScale = 200;
   window.clear(sf::Color(grayScale, grayScale, grayScale, 255));
   for (int i = 0; i < uielements.size(); i++) {
@@ -36,6 +36,6 @@ void gui::draw() {
   window.display();
 }
 
-bool gui::isOpen() { return window.isOpen(); }
+bool Gui::isOpen() { return window.isOpen(); }
 
-void gui::pushElement(uielement *elem) { uielements.push_back(elem); }
+void Gui::pushElement(uielement *elem) { uielements.push_back(elem); }
