@@ -37,5 +37,6 @@ public:
   void setPosition(float x, float y);
   bool changed();
   int getSelectedItem();
+  void setSelectedItem(int number);
   list();
 };

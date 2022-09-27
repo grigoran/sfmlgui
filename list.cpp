@@ -16,7 +16,7 @@ list::list()
   menuBackground.setSize(sf::Vector2f(200.0f, 100.0f));
   menuBackground.setFillColor(sf::Color(15, 98, 166, 255));
   menuBackground.move(0.0f, rect.getSize().y);
-  font.loadFromFile("../Hack-Bold.ttf");
+  font.loadFromFile("Hack-Bold.ttf");
 
   selectedContent.setFont(font);
   selectedContent.setCharacterSize(fontSize);
@@ -24,6 +24,11 @@ list::list()
   selectedContent.setPosition(0, fontSpacing);
 
   changeCallback = defaultCallback;
+}
+
+void list::setSelectedItem(int number) {
+  selectedItem = number;
+  selectedContent.setString(content[number].getString());
 }
 
 void list::setChangeCallback(void (*callback)(void *, int)) {
