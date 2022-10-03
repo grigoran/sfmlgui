@@ -6,8 +6,7 @@ set(CMAKE_DEBUG_POSTFIX d)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 find_package(SFML 2.5 COMPONENTS graphics)
 include_directories("./headers")
-set(SOURCE gui.cpp uielement.cpp button.cpp list.cpp main.cpp Plot.cpp)
-#add_executable(gui main.cpp ${SOURCE})                                                #coment when build like a library
+set(SOURCE gui.cpp uielement.cpp button.cpp list.cpp Plot.cpp)
 add_library(gui ${SOURCE})                                                           #uncomment when build like a library
 set_target_properties(gui PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 target_link_libraries(gui sfml-graphics)
