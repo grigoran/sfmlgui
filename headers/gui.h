@@ -1,3 +1,4 @@
+#include "Plot.h"
 #include "button.h"
 #include "list.h"
 #include <SFML/Graphics.hpp>
