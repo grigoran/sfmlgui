@@ -5,7 +5,9 @@
 #include <SFML/Window/Mouse.hpp>
 
 Gui::Gui(int resolutionX, int resolutionY, const char *title)
-    : window(sf::VideoMode(resolutionX, resolutionY), title) {}
+    : window(sf::VideoMode(resolutionX, resolutionY), title) {
+  window.setFramerateLimit(60);
+}
 
 void Gui::update() {
   mousePos = sf::Mouse::getPosition(window);
